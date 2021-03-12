@@ -1,5 +1,5 @@
 <template>
-  <h1 v-if="!$store.state.tasks.length" class="text-white center">Задач пока нет</h1>
+  <h1 v-if="!tasks.length" class="text-white center">Задач пока нет</h1>
   <template v-else>
     <h3 class="text-white">Всего активных задач: {{activeTasks.length}}</h3>
     <div v-for="task in tasks" :key=task.id class="card">
@@ -10,11 +10,14 @@
       <p>
         <strong>
           <small>
-            {{ task.deadline }}
+            {{ task.date }}
           </small>
         </strong>
       </p>
-      <button class="btn primary" @click="goToTask(task.id)">Посмотреть</button>
+      <div class="btn__inner">
+        <button class="btn primary" @click="goToTask(task.id)">Посмотреть</button>
+        <button class="btn danger" @click="remove(task.id)">Удалить</button>
+      </div>
     </div>
   </template>
 </template>
@@ -29,6 +32,10 @@ export default {
     const router = useRouter()
     const store = useStore()
 
+    function remove(id) {
+      store.commit('delTask',{id: id})
+    }
+
     function goToTask(id) {
       router.push(`/task/${id}`) 
     }
@@ -36,9 +43,16 @@ export default {
     return {
       tasks: store.getters.tasks,
       activeTasks: store.getters.activeTasks,
-      goToTask
+      goToTask,remove
     }
   },
   components: {AppStatus}
 }
 </script>
+<style scoped>
+.btn__inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>

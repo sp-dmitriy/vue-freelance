@@ -2,8 +2,8 @@
   <div v-if="task" class="card">
     <h2>{{ task.title }}</h2>
     <p><strong>Статус</strong>: <AppStatus :type="task.status" /></p>
-    <p><strong>Дэдлайн</strong>: {{ task.deadline }}</p>
-    <p><strong>Описание</strong>: {{ task.text }}</p>
+    <p><strong>Дэдлайн</strong>: {{ task.date }}</p>
+    <p><strong>Описание</strong>: {{ task.description }}</p>
     <div class="btn__inner">
       <div>
         <button class="btn" @click="change('active')">Взять в работу</button>
