@@ -32,6 +32,8 @@ export default {
     const router = useRouter()
     const store = useStore()
 
+    store.dispatch('setToState')
+
     function remove(id) {
       store.commit('delTask',{id: id})
     }
