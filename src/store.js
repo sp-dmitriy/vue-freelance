@@ -34,9 +34,14 @@ export default  createStore({
   },
   actions: {
     setToState({commit}) {
-      const data = localStorage.getItem('tasks')
-      console.log(data)
-      commit('loadState', JSON.parse(data))
+      try{
+        const data = localStorage.getItem('tasks')
+        if(data) {
+          commit('loadState', JSON.parse(data))
+        } 
+      } catch(e){
+        console.log(e.message)
+      }
     }
   },
   getters: {
